@@ -1,8 +1,6 @@
 
 <?php
 
-    include_once '.env';
-
     class conexion{
 
         private $url;
