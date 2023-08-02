@@ -8,7 +8,6 @@
     $respuesta = new Respuesta;
     $auth = new authClass;
 
-    header("Content-Type: application/json");
 
     if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
