@@ -1,4 +1,20 @@
 
+<?php 
+
+    include_once 'database/consulta.php';
+
+    $consulta = new Consulta();
+
+    $query = "select * from usuario_myvote";
+    $result = $consulta->executeQuery($query);
+    $usuarioList = array();
+    foreach ($result as $key => $value) {
+        $usuarioList[] = $value;
+    }
+    echo json_encode($usuarioList);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
