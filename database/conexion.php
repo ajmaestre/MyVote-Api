@@ -1,6 +1,8 @@
 
 <?php
 
+    include_once '.env';
+
     class conexion{
 
         private $url;
@@ -8,19 +10,16 @@
 
         public function __construct() {
             try {
-                $datosLista = $this->datosConexion();
-                foreach ($datosLista as $key => $value) {
-                    $this->url = $value["url"];
-                }
-                $this->conexion = pg_connect($this->url);
+                $datosLista = $_ENV['DATABASE_URL'];
+                $this->conexion = pg_connect($datosLista);
             } catch (Exception $e) {
                 return false;
             }
         }
 
         private function datosConexion(){
-            $direccion = dirname(__FILE__);
-            $jsondata = file_get_contents($direccion . "/" . "config");
+            $direccion = dirname(__DIR__);
+            $jsondata = file_get_contents($direccion . "\\" . ".env");
             return json_decode($jsondata, true);
         }
 
