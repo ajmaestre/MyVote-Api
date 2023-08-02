@@ -9,7 +9,7 @@
         public function __construct() {
             try {
                 $datosLista = $_ENV['DATABASE_URL'];
-                $this->conexion = pg_connect($datosLista);
+                $this->conexion = pg_connect("$datosLista");
             } catch (Exception $e) {
                 return false;
             }
