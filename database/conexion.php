@@ -9,7 +9,7 @@
         public function __construct() {
             try {
                 $datosLista = $_ENV['DATABASE_URL'];
-                $this->conexion = pg_connect("postgres://admin:4U9SpzKXDDp2cH8w588DX46SGABuZpt0@dpg-cim6hotgkuvinfmj3l50-a.oregon-postgres.render.com/enginerds_db");
+                $this->conexion = pg_connect($datosLista);
             } catch (Exception $e) {
                 return false;
             }
