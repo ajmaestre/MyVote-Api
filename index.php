@@ -3,6 +3,8 @@
 
     include_once 'database/consulta.php';
 
+    echo $_ENV['DATABASE_URL'];
+
     $consulta = new Consulta();
 
     $query = "select * from usuario_myvote";
