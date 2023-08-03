@@ -1,5 +1,10 @@
 <?php 
 
+    header("Access-Control-Allow-Origin: *");
+    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+    header("Access-Control-Allow-Headers: Access-Control-Allow-Origin, Content-Type, token");
+    header("Content-Type: application/json");
+
     require_once "../app/services/jurados.php";
     require_once "../app/respuestas/respuesta.php";
     require_once "../app/auth/authClass.php";
@@ -7,11 +12,6 @@
     $jurado = new Jurado;
     $respuesta = new Respuesta;
     $auth = new authClass;
-
-    header("Access-Control-Allow-Origin: *");
-    header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-    header("Access-Control-Allow-Headers: Access-Control-Allow-Origin, Content-Type, token");
-    header("Content-Type: application/json");
 
 
     if($_SERVER["REQUEST_METHOD"] == "GET"){
