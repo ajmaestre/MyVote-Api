@@ -18,7 +18,7 @@
     if($_SERVER["REQUEST_METHOD"] == "GET"){
 
         $headers = getallheaders();
-        $tkn = $headers['token'];
+        $tkn = $headers['Token'];
         if(isset($headers['token'])){
             $is_token = $auth->findToken($headers['token']);
             if($is_token){
