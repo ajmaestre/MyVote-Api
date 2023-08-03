@@ -130,7 +130,7 @@
 
         public function findToken($token){
             try {
-                $query = "select * from tokens_myvote where token = $token";
+                $query = "select * from tokens_myvote where token = '$token' and estado = 'activo'";
                 $result = parent::executeQuery($query);
                 if(isset($result[0]['id'])){
                     return true;
