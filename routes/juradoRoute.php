@@ -15,6 +15,7 @@
         $headers = getallheaders();
         if(isset($headers['token'])){
             $is_token = $auth->findToken($headers['token']);
+            echo $is_token;
             if($is_token){
                 if(isset($_GET["page"])){
                     $pagina = $_GET["page"];
