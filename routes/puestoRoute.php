@@ -1,4 +1,3 @@
-
 <?php 
 
     header("Access-Control-Allow-Origin: *");
@@ -86,7 +85,7 @@
             $response_invalid = $respuesta->error401("Token invalido");
             echo json_encode($response_invalid);
         }
-        
+
     }else{
         $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
         echo json_encode($response_invalid);
