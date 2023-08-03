@@ -132,7 +132,7 @@
             try {
                 $query = "select * from tokens_myvote where token = $token";
                 $result = parent::executeQuery($query);
-                if($result){
+                if(isset($result[0]['id'])){
                     return true;
                 }else{
                     return false;
