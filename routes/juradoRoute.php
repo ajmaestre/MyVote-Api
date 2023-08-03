@@ -40,7 +40,7 @@
                 echo json_encode($response_invalid);
             }
         }else{
-            $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
+            $response_invalid = $respuesta->error401("No se ha encontrado ningun token: $headers");
             echo json_encode($response_invalid);
         }
 
