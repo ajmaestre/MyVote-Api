@@ -26,11 +26,15 @@
         public function executeQuery($query){
             try {
                 $result = pg_query($this->conexion, $query);
-                $resultArray = array();
-                while ($row = pg_fetch_assoc($result)) {
-                    $resultArray[] = $row;
+                if(isset($result[0]['id'])){
+                    $resultArray = array();
+                    while ($row = pg_fetch_assoc($result)) {
+                        $resultArray[] = $row;
+                    }
+                    return $this->toUTF8($resultArray);
+                }else{
+                    return false;
                 }
-                return $this->toUTF8($resultArray);
             } catch (Exception $e) {
                 return false;
             }

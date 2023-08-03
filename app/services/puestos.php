@@ -47,7 +47,7 @@
                     $inicio = ($cantidad * ($pagina - 1)) + 1;
                     $cantidad = $cantidad * $pagina;
                 }
-                $query = "select * from $this->table limit $inicio, $cantidad";
+                $query = "select * from $this->table limit $cantidad offset $inicio";
                 $result = parent::executeQuery($query);
                 foreach ($result as $key => $value) {
                     $puesto = $this->setPuesto($value);
