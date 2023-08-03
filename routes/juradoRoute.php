@@ -30,12 +30,11 @@
                     echo json_encode($jurado_data);
                 }else{
                     $juradoLista = $jurado->getJuradoLista();
-                    header("Content-Type: application/json");      
                     http_response_code(200);      
                     echo json_encode($juradoLista);
                 }
             }else{
-                $response_invalid = $respuesta->error401("bokennn invalido");
+                $response_invalid = $respuesta->error401("Token invalido");
                 echo json_encode($response_invalid);
             }
         }else{
