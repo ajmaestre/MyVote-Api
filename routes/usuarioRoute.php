@@ -13,12 +13,14 @@
     $respuesta = new Respuesta;
     $auth = new authClass;
 
-    if($_SERVER["REQUEST_METHOD"] == "GET"){
+    
+    $headers = getallheaders();
+    if(isset($headers['Token'])){
+        $is_token = $auth->findToken($headers['Token']);
+        if($is_token){
+            
+            if($_SERVER["REQUEST_METHOD"] == "GET"){
 
-        $headers = getallheaders();
-        if(isset($headers['token'])){
-            $is_token = $auth->findToken($headers['token']);
-            if($is_token){
                 if(isset($_GET["page"])){
                     $pagina = $_GET["page"];
                     $usuarioLista = $usuario->getUsuarioPagina($pagina);
@@ -34,21 +36,9 @@
                     http_response_code(200);      
                     echo json_encode($usuarioLista);
                 }
-            }else{
-                $response_invalid = $respuesta->error401("Token invalido");
-                echo json_encode($response_invalid);
-            }
-        }else{
-            $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
-            echo json_encode($response_invalid);
-        }
-
-    }else if($_SERVER["REQUEST_METHOD"] == "POST"){
         
-        $headers = getallheaders();
-        if(isset($headers['token'])){
-            $is_admin = $auth->isAdmin($headers['token']);
-            if($is_admin){
+            }else if($_SERVER["REQUEST_METHOD"] == "POST"){
+                
                 $body = file_get_contents("php://input");
                 $result = $usuario->saveUsuario($body);
                 if(isset($result["result"]["error_id"])){
@@ -58,21 +48,9 @@
                     http_response_code(200);
                 }
                 echo json_encode($result); 
-            }else{
-                $response_invalid = $respuesta->error401("Usuario no autorizado");
-                echo json_encode($response_invalid);
-            }
-        }else{
-            $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
-            echo json_encode($response_invalid);
-        }
-
-    }else if($_SERVER["REQUEST_METHOD"] == "DELETE"){
         
-        $headers = getallheaders();
-        if(isset($headers['token'])){
-            $is_admin = $auth->isAdmin($headers['token']);
-            if($is_admin){
+            }else if($_SERVER["REQUEST_METHOD"] == "DELETE"){
+                
                 $body = file_get_contents("php://input");
                 $result = $usuario->deleteUsuario($body);
                 if(isset($result["result"]["error_id"])){
@@ -82,21 +60,9 @@
                     http_response_code(200);
                 }
                 echo json_encode($result);
-            }else{
-                $response_invalid = $respuesta->error401("Usuario no autorizado");
-                echo json_encode($response_invalid);
-            }
-        }else{
-            $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
-            echo json_encode($response_invalid);
-        }
-        
-    }else if($_SERVER["REQUEST_METHOD"] == "PUT"){
-        
-        $headers = getallheaders();
-        if(isset($headers['token'])){
-            $is_admin = $auth->isAdmin($headers['token']);
-            if($is_admin){
+                
+            }else if($_SERVER["REQUEST_METHOD"] == "PUT"){
+                
                 $body = file_get_contents("php://input");
                 $result = $usuario->updateUsuario($body);
                 if(isset($result["result"]["error_id"])){
@@ -106,20 +72,22 @@
                     http_response_code(200);
                 }
                 echo json_encode($result);
+                
             }else{
-                $response_invalid = $respuesta->error401("Usuario no autorizado");
+        
+                $response_invalid = $respuesta->error405();
                 echo json_encode($response_invalid);
+        
             }
+
         }else{
-            $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
+            $response_invalid = $respuesta->error401("Token invalido");
             echo json_encode($response_invalid);
         }
-        
     }else{
-
-        $response_invalid = $respuesta->error405();
+        $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
         echo json_encode($response_invalid);
-
     }
+
 
 ?>
