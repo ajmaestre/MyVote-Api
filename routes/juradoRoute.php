@@ -4,6 +4,7 @@
     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
     header("Access-Control-Allow-Headers: Access-Control-Allow-Origin, Content-Type, token");
     header("Content-Type: application/json");
+    
 
     require_once "../app/services/jurados.php";
     require_once "../app/respuestas/respuesta.php";
@@ -23,7 +24,6 @@
                 if(isset($_GET["page"])){
                     $pagina = $_GET["page"];
                     $juradoLista = $jurado->getJuradoPagina($pagina);
-                    http_response_code(200);      
                     echo json_encode($juradoLista);
                 }else if(isset($_GET["id"])){
                     $id_jurado = $_GET["id"];
@@ -52,7 +52,6 @@
             if($is_token){
                 $body = file_get_contents("php://input");
                 $result = $jurado->saveJurado($body);
-                header("Content-Type: application/json");      
                 if(isset($result["result"]["error_id"])){
                     $error_code = $result["result"]["error_id"];
                     http_response_code($error_code);
@@ -61,12 +60,10 @@
                 }
                 echo json_encode($result); 
             }else{
-                header("Content-Type: application/json");
                 $response_invalid = $respuesta->error401("Token Invalido");
                 echo json_encode($response_invalid);
             }
         }else{
-            header("Content-Type: application/json");
             $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
             echo json_encode($response_invalid);
         }
@@ -79,7 +76,6 @@
             if($is_token){
                 $body = file_get_contents("php://input");
                 $result = $jurado->deleteJurado($body);
-                header("Content-Type: application/json");      
                 if(isset($result["result"]["error_id"])){
                     $error_code = $result["result"]["error_id"];
                     http_response_code($error_code);
@@ -88,12 +84,10 @@
                 }
                 echo json_encode($result);
             }else{
-                header("Content-Type: application/json");
                 $response_invalid = $respuesta->error401("Usuario no autorizado");
                 echo json_encode($response_invalid);
             }
         }else{
-            header("Content-Type: application/json");
             $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
             echo json_encode($response_invalid);
         }
@@ -106,7 +100,6 @@
             if($is_token){
                 $body = file_get_contents("php://input");
                 $result = $jurado->updateJurado($body);
-                header("Content-Type: application/json");      
                 if(isset($result["result"]["error_id"])){
                     $error_code = $result["result"]["error_id"];
                     http_response_code($error_code);
@@ -115,19 +108,16 @@
                 }
                 echo json_encode($result);
             }else{
-                header("Content-Type: application/json");
                 $response_invalid = $respuesta->error401("Usuario no autorizado");
                 echo json_encode($response_invalid);
             }
         }else{
-            header("Content-Type: application/json");
             $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
             echo json_encode($response_invalid);
         }
         
     }else{
 
-        header("Content-Type: application/json");
         $response_invalid = $respuesta->error405();
         echo json_encode($response_invalid);
 
