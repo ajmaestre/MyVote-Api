@@ -1,4 +1,3 @@
-
 <?php 
 
     require_once "../app/services/usuarios.php";
@@ -9,7 +8,6 @@
     $respuesta = new Respuesta;
     $auth = new authClass;
 
-    header("Access-Control-Max-Age: 50"); 
     header("Access-Control-Allow-Origin: *");
     header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
     header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Custom-Header, token");
