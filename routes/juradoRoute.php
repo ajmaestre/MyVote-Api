@@ -15,7 +15,6 @@
         $headers = getallheaders();
         if(isset($headers['token'])){
             $is_token = $auth->findToken($headers['token']);
-            echo $is_token;
             if($is_token){
                 if(isset($_GET["page"])){
                     $pagina = $_GET["page"];
@@ -36,6 +35,7 @@
                     echo json_encode($juradoLista);
                 }
             }else{
+                echo $is_token;
                 header("Content-Type: application/json");
                 $response_invalid = $respuesta->error401("Token invalido");
                 echo json_encode($response_invalid);
