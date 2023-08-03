@@ -36,7 +36,7 @@
                 }
             }else{
                 header("Content-Type: application/json");
-                $response_invalid = $respuesta->error401("Token invalido $is_token");
+                $response_invalid = $respuesta->error401("Token invalido $is_token hola");
                 echo json_encode($response_invalid);
             }
         }else{
