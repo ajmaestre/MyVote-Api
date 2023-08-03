@@ -51,8 +51,17 @@
         
             }else if($_SERVER["REQUEST_METHOD"] == "DELETE"){
                 
-                $body = file_get_contents("php://input");
-                $result = $usuario->deleteUsuario($body);
+                $result = '';
+                if(isset($_GET["id"])){
+                    $id_usuario = $_GET["id"];
+                    $result = $usuario->deleteUsuario($id_usuario);
+                }else{
+                    $body = file_get_contents("php://input");
+                    $body = json_decode($body, true);
+                    $id_usuario = $body["id"];
+                    $result = $usuario->deleteUsuario($id_usuario);
+                }
+
                 if(isset($result["result"]["error_id"])){
                     $error_code = $result["result"]["error_id"];
                     http_response_code($error_code);

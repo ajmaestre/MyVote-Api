@@ -128,10 +128,6 @@
         public function deleteUsuario($data){
             try {
                 $respuesta = new Respuesta();
-                $usuario = json_decode($data, true);
-                if(!isset($usuario['id'])){
-                    return $respuesta->error400();
-                }
                 $query = "delete from $this->table
                             where id = ".$usuario['id']."";
                 $result = parent::executeNotQuery($query);
