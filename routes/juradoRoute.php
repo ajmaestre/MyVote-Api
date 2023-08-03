@@ -19,13 +19,11 @@
                 if(isset($_GET["page"])){
                     $pagina = $_GET["page"];
                     $juradoLista = $jurado->getJuradoPagina($pagina);
-                    header("Content-Type: application/json");      
                     http_response_code(200);      
                     echo json_encode($juradoLista);
                 }else if(isset($_GET["id"])){
                     $id_jurado = $_GET["id"];
                     $jurado_data = $jurado->getJurado($id_jurado);
-                    header("Content-Type: application/json");      
                     http_response_code(200);      
                     echo json_encode($jurado_data);
                 }else{
@@ -38,7 +36,6 @@
                 echo json_encode($response_invalid);
             }
         }else{
-            header("Content-Type: application/json");
             $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
             echo json_encode($response_invalid);
         }
