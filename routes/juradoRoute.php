@@ -17,11 +17,7 @@
 
     if($_SERVER["REQUEST_METHOD"] == "GET"){
 
-        $headers = getallheaders();
-        echo $headers["Token"];
-        foreach ($headers as $name => $value) {
-            echo "$name: $value ";
-        }
+        $headers = apache_request_headers();
         if(isset($headers['token'])){
             $is_token = $auth->findToken($headers['token']);
             if($is_token){
