@@ -35,7 +35,6 @@
                     echo json_encode($juradoLista);
                 }
             }else{
-                header("Content-Type: application/json");
                 $response_invalid = $respuesta->error401("bokennn invalido");
                 echo json_encode($response_invalid);
             }
