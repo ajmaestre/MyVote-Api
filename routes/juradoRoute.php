@@ -18,6 +18,7 @@
     if($_SERVER["REQUEST_METHOD"] == "GET"){
 
         $headers = getallheaders();
+        echo $headers["Token"];
         foreach ($headers as $name => $value) {
             echo "$name: $value ";
         }
