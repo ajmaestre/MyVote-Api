@@ -18,7 +18,9 @@
     if($_SERVER["REQUEST_METHOD"] == "GET"){
 
         $headers = getallheaders();
-        $tkn = $headers['Token'];
+        foreach ($headers as $name => $value) {
+            echo "$name: $value ";
+        }
         if(isset($headers['token'])){
             $is_token = $auth->findToken($headers['token']);
             if($is_token){
@@ -41,7 +43,7 @@
                 echo json_encode($response_invalid);
             }
         }else{
-            $response_invalid = $respuesta->error401("No se ha encontrado ningun token: $tkn");
+            $response_invalid = $respuesta->error401("No se ha encontrado ningun token");
             echo json_encode($response_invalid);
         }
 
