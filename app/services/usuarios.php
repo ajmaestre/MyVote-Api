@@ -125,11 +125,11 @@
             }
         }
 
-        public function deleteUsuario($data){
+        public function deleteUsuario($id){
             try {
                 $respuesta = new Respuesta();
                 $query = "delete from $this->table
-                            where id = ".$usuario['id']."";
+                            where id = ".$id."";
                 $result = parent::executeNotQuery($query);
                 if ($result) {
                     $response = $respuesta->response;
