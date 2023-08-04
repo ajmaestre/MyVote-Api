@@ -72,7 +72,7 @@
                             (
                                 '".$jurado->getNombre()."', 
                                 '".$jurado->getApellido()."', 
-                                '".$jurado->getCedula()."', 
+                                ".$jurado->getCedula().", 
                                 '".$jurado->getCargo()."',
                                 '".$jurado->getIdMesa()."'
                             )";
@@ -102,7 +102,7 @@
                 $query = "update $this->table set
                             nombre = '".$jurado->getNombre()."', 
                             apellido = '".$jurado->getApellido()."',
-                            cedula = '".$jurado->getCedula()."',
+                            cedula = ".$jurado->getCedula().",
                             cargo = '".$jurado->getCargo()."',
                             id_mesa = '".$jurado->getIdMesa()."'
                             where id = ".$jurado->getId()."";
