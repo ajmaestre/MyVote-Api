@@ -58,7 +58,7 @@
                     $body = file_get_contents("php://input");
                     $body = json_decode($body, true);
                     $id_jurado = $body["id"];
-                    $result = $jurado->deleteJurado($id_mesa);
+                    $result = $jurado->deleteJurado($id_jurado);
                 }
                 
                 if(isset($result["result"]["error_id"])){
