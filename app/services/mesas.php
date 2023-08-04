@@ -119,6 +119,33 @@
             }
         }
 
+        public function addVotes($id, $data){
+            try {
+                $respuesta = new Respuesta();
+                $data = json_decode($data, true);
+                if(!$id || !isset($data['votos'])){
+                    return $respuesta->error400();
+                }
+                $mesa = $this->getMesa($id);
+                $data['votos'] += $mesa['votos'];
+                $query = "update $this->table set
+                            votos = ".$data['votos']."
+                            where id = ".$id."";
+                $result = parent::executeNotQuery($query);
+                if ($result) {
+                    $response = $respuesta->response;
+                    $response["result"] = array(
+                        "message" => "Votos agregados"
+                    );
+                    return $response;
+                } else {
+                    return $respuesta->error500();
+                }
+            } catch (Exception $e) {
+                return $respuesta->error500();
+            }
+        }
+        
         public function deleteMesa($id){
             try {
                 $respuesta = new Respuesta();

@@ -16,7 +16,7 @@
     
     $headers = getallheaders();
     if(isset($headers['Token'])){
-        $is_token = $auth->findToken($headers['Token']);
+        $is_token = $auth->isAdmin($headers['Token']);
         if($is_token){
             
             if($_SERVER["REQUEST_METHOD"] == "GET"){

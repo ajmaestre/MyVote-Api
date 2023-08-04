@@ -11,10 +11,11 @@
         private $id_puesto;
         private $mesa = array();
 
-        public function __construct($numero, $total_inscritos, $id_usuario, $id_puesto, $id = -1) {
+        public function __construct($numero, $total_inscritos, $votos, $id_usuario, $id_puesto, $id = -1) {
             $this->id = $id;
             $this->numero = $numero;
             $this->total_inscritos = $total_inscritos;
+            $this->votos = $votos;
             $this->id_usuario = $id_usuario;
             $this->id_puesto = $id_puesto;
         }

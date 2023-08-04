@@ -72,8 +72,15 @@
                 
             }else if($_SERVER["REQUEST_METHOD"] == "PUT"){
                 
+                $result = '';
                 $body = file_get_contents("php://input");
-                $result = $mesa->updateMesa($body);
+                if(isset($_GET["id"])){
+                    $id_mesa = $_GET["id"];
+                    $result = $mesa->addVotes($id_mesa, $body);
+                }else{
+                    $result = $mesa->updateMesa($body);
+                }
+                
                 if(isset($result["result"]["error_id"])){
                     $error_code = $result["result"]["error_id"];
                     http_response_code($error_code);
