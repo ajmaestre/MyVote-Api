@@ -121,15 +121,11 @@
             }
         }
 
-        public function deletePuesto($data){
+        public function deletePuesto($id){
             try {
                 $respuesta = new Respuesta();
-                $puesto = json_decode($data, true);
-                if(!isset($puesto['id'])){
-                    return $respuesta->error400();
-                }
                 $query = "delete from $this->table
-                            where id = ".$puesto['id']."";
+                            where id = ".$id."";
                 $result = parent::executeNotQuery($query);
                 if ($result) {
                     $response = $respuesta->response;

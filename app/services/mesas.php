@@ -119,15 +119,11 @@
             }
         }
 
-        public function deleteMesa($data){
+        public function deleteMesa($id){
             try {
                 $respuesta = new Respuesta();
-                $mesa = json_decode($data, true);
-                if(!isset($mesa['id'])){
-                    return $respuesta->error400();
-                }
                 $query = "delete from $this->table
-                            where id = ".$mesa['id']."";
+                            where id = ".$id."";
                 $result = parent::executeNotQuery($query);
                 if ($result) {
                     $response = $respuesta->response;

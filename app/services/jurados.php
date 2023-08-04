@@ -121,15 +121,11 @@
             }
         }
 
-        public function deleteJurado($data){
+        public function deleteJurado($id){
             try {
                 $respuesta = new Respuesta();
-                $jurado = json_decode($data, true);
-                if(!isset($jurado['id'])){
-                    return $respuesta->error400();
-                }
                 $query = "delete from $this->table
-                            where id = ".$jurado['id']."";
+                            where id = ".$id."";
                 $result = parent::executeNotQuery($query);
                 if ($result) {
                     $response = $respuesta->response;

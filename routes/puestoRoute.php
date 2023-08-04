@@ -52,8 +52,17 @@
             
             }else if($_SERVER["REQUEST_METHOD"] == "DELETE"){
 
-                $body = file_get_contents("php://input");
-                $result = $puesto->deletePuesto($body);
+                $result = '';
+                if(isset($_GET["id"])){
+                    $id_puesto = $_GET["id"];
+                    $result = $puesto->deletePuesto($id_puesto);
+                }else{
+                    $body = file_get_contents("php://input");
+                    $body = json_decode($body, true);
+                    $id_puesto = $body["id"];
+                    $result = $puesto->deletePuesto($id_puesto);
+                }
+                
                 if(isset($result["result"]["error_id"])){
                     $error_code = $result["result"]["error_id"];
                     http_response_code($error_code);

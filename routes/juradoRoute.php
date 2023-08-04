@@ -49,9 +49,18 @@
                 echo json_encode($result); 
         
             }else if($_SERVER["REQUEST_METHOD"] == "DELETE"){
+
+                $result = '';
+                if(isset($_GET["id"])){
+                    $id_jurado = $_GET["id"];
+                    $result = $jurado->deleteJurado($id_jurado);
+                }else{
+                    $body = file_get_contents("php://input");
+                    $body = json_decode($body, true);
+                    $id_jurado = $body["id"];
+                    $result = $jurado->deleteJurado($id_mesa);
+                }
                 
-                $body = file_get_contents("php://input");
-                $result = $jurado->deleteJurado($body);
                 if(isset($result["result"]["error_id"])){
                     $error_code = $result["result"]["error_id"];
                     http_response_code($error_code);
