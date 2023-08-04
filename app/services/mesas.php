@@ -145,7 +145,7 @@
                 return $respuesta->error500();
             }
         }
-        
+
         public function deleteMesa($id){
             try {
                 $respuesta = new Respuesta();
@@ -172,6 +172,7 @@
                     $mesa = new MesaModel(
                         $data['numero'], 
                         $data['total_inscritos'], 
+                        $data['votos'],
                         $data['id_usuario'],
                         $data['id_puesto'],
                         $data['id']
@@ -180,6 +181,7 @@
                     $mesa = new MesaModel(
                         $data['numero'], 
                         $data['total_inscritos'], 
+                        $data['votos'],
                         $data['id_usuario'],
                         $data['id_puesto']
                     );
